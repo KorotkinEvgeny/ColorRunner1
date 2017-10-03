@@ -17,7 +17,7 @@ public class ShootingScript : MonoBehaviour {
 
 		//	bulletInstance = Instantiate(bulletPrefab,gunEnd.position,gunEnd.rotation);
 		//	bulletInstance.AddForce (gunEnd.forward * forcePower);
-
+///
  	//	}
 
 		//if (Input.GetButtonDown ("Fire2")) {
