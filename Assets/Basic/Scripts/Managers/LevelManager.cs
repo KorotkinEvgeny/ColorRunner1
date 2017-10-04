@@ -6,26 +6,32 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
 
+    private const string levelSelectScene = "LevelSelect";
+
     public string [] levelNamesArray;
 
+    private static LevelManager instance;
 
     private int currentLevel = 0;
 
-
-
-
-    public void LoadLevel()
+    void Awake()
     {
-        if (currentLevel != null)
-        {
-            SceneManager.LoadScene(levelNamesArray[currentLevel]);
-        }
+        if (!instance)
+            instance = this;
+        else
+            Destroy(this.gameObject);
 
+        DontDestroyOnLoad(this.gameObject);
     }
 
-    public void StartGameFromBeggining()
+    public void LoadLevel(int sceneInArray)
     {
-        //Application.LoadLevel(levelsArray.);
+        SceneManager.LoadScene(levelNamesArray[sceneInArray]);
+    }
+
+    public void LoadSelectMenu()
+    {
+        SceneManager.LoadScene(levelSelectScene);
     }
 
     public void ExitGame()
