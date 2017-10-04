@@ -57,23 +57,23 @@ public class ElevatorScript : MonoBehaviour {
 
 	public void ElevatorDoorsOpen()
 	{
-		if (!isDoorsOpen) 
-		{
+		//if (!isDoorsOpen) 
+		//{
             StartCoroutine("OpenDoors");
-			isDoorsOpen = true;
+			//isDoorsOpen = true;
 			readyToStart = false;
-		} 
+		//} 
 
 	}
 
 	public void ElevatorDoorsClose()
 	{
-		if(isDoorsOpen) 
-		{
+		//if(isDoorsOpen) 
+		//{
 			elevatorAnimator.SetTrigger ("DoorClose");
-			isDoorsOpen = false;
-            readyToStart = true;
-        }
+        //isDoorsOpen = false;
+        readyToStart = true;
+        //     }
     }
 
 	public void Close()
