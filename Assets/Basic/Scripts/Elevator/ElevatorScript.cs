@@ -7,12 +7,11 @@ public class ElevatorScript : MonoBehaviour {
 
 	private Animator elevatorAnimator;
 	private bool isDoorsOpen = false;
-	public float heightTransportation;
 	public float speedElevator;
 	private bool readyToStart = false;
 
-	private Vector3 startPosition;
-	public Vector3 endPosition;
+	private float startPosition;
+	public float heightTransportation = 0;
     //private Rigidbody rigidbodyElevator;
     //
 
@@ -33,9 +32,7 @@ public class ElevatorScript : MonoBehaviour {
 	{
 
 		elevatorAnimator = GetComponent<Animator> ();
-		startPosition = this.transform.position;
-
-        //rigidbodyElevator = GetComponent<Rigidbody>();
+		startPosition = this.transform.position.y;
     }
 
 
@@ -44,7 +41,7 @@ public class ElevatorScript : MonoBehaviour {
 	{
 		if(readyToStart)
 		{
-			if (transform.position.y <= endPosition.y) 
+			if (transform.position.y <= startPosition + heightTransportation) 
 			{
                 //Add pause for some seconds
                 this.transform.Translate(new Vector3(0,0, speedElevator * Time.deltaTime));
@@ -62,7 +59,7 @@ public class ElevatorScript : MonoBehaviour {
 	{
 		if (!isDoorsOpen) 
 		{
-			elevatorAnimator.SetTrigger ("DoorOpen");
+            StartCoroutine("OpenDoors");
 			isDoorsOpen = true;
 			readyToStart = false;
 		} 
@@ -89,5 +86,10 @@ public class ElevatorScript : MonoBehaviour {
 		readyToStart = true;
 		Debug.Log ("animation event end");
 	}
-		
+    IEnumerator OpenDoors()
+    {
+        elevatorAnimator.SetTrigger("DoorOpen");
+        
+        yield return new WaitForSeconds(5f);
+    }
 }
